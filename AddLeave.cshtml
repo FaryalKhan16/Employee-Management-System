@@ -1,0 +1,299 @@
+﻿@* @model UniversityManagementSystem.Models.EmployeeLeave 
+@{
+    ViewBag.Title = "Add Leave Request";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Leave Request</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f4f7fa;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: #121212;
+            color: white;
+            min-height: 100vh;
+            padding-top: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar h4 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #1f1f1f;
+            color: #00ff88;
+        }
+
+        .main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #000;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4>Add Leave Request</h4>
+        <a href="/Login/AddProject"><i class="fas fa-home"></i> Add Project</a>
+        <a href="/Login/GetEmployess"><i class="fas fa-users"></i> Employee List</a>
+        <a href="/Login/Index"><i class="fas fa-chart-bar"></i> Dashboard</a>
+        <a href="/Login/GetProjects"><i class="fas fa-chart-bar"></i> Projects List</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="form-container">
+            <h2>Add Leave Request</h2>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
+            else if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+
+            <form asp-action="AddLeave" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="EId" class="form-label">Employee ID</label>
+                        <input asp-for="EId" class="form-control" required />
+                        <span asp-validation-for="EId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="StartDate" class="form-label">Start Date</label>
+                        <input asp-for="StartDate" type="date" class="form-control" required />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="EndDate" class="form-label">End Date</label>
+                        <input asp-for="EndDate" type="date" class="form-control" required />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label asp-for="Reason" class="form-label">Reason</label>
+                        <textarea asp-for="Reason" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Status" class="form-label">Status</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-dark w-100">Submit Leave Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+ *@
+
+
+@model UniversityManagementSystem.Models.EmployeeLeave
+@{
+    ViewBag.Title = "Add Leave Request";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Leave Request</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f4f7fa;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #121212;
+            color: white;
+            min-height: 100vh;
+            padding-top: 20px;
+            flex-shrink: 0;
+        }
+
+            .sidebar h4 {
+                text-align: center;
+                margin-bottom: 30px;
+                font-weight: bold;
+            }
+
+            .sidebar a {
+                display: block;
+                color: white;
+                padding: 12px 20px;
+                text-decoration: none;
+                transition: background 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background-color: #1f1f1f;
+                    color: #00ff88;
+                }
+
+        .main {
+            flex: 1;
+            padding: 20px 10px;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            /* Set width relative to sidebar and padding */
+            width: calc(100% - 70px - 60px);
+            max-width: none;
+            margin: 0 auto;
+        }
+
+            .form-container h2 {
+                text-align: center;
+                color: #000;
+                margin-bottom: 25px;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4>Add Leave Request</h4>
+        <a href="/Login/AddProject"><i class="fas fa-home"></i> Add Project</a>
+        <a href="/Login/GetEmployess"><i class="fas fa-users"></i> Employee List</a>
+        <a href="/Login/Index"><i class="fas fa-chart-bar"></i> Dashboard</a>
+        <a href="/Login/GetProjects"><i class="fas fa-chart-bar"></i> Projects List</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="form-container">
+            <h2>Add Leave Request</h2>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
+            else if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+
+            <form asp-action="AddLeave" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="EId" class="form-label">Employee ID</label>
+                        <input asp-for="EId" class="form-control" required />
+                        <span asp-validation-for="EId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="StartDate" class="form-label">Start Date</label>
+                        <input asp-for="StartDate" type="date" class="form-control" required />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="EndDate" class="form-label">End Date</label>
+                        <input asp-for="EndDate" type="date" class="form-control" required />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label asp-for="Reason" class="form-label">Reason</label>
+                        <textarea asp-for="Reason" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Status" class="form-label">Status</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-dark w-100">Submit Leave Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

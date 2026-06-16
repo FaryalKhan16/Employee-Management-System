@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employe Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            padding: 0 10px;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @@keyframes gradientBG {
+            0%
+
+        {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+
+        }
+
+        .wrapper {
+            width: 400px;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            margin-left: 450px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-field {
+            position: relative;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            margin: 20px 0;
+        }
+
+            .input-field label {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 16px;
+                pointer-events: none;
+                transition: 0.15s ease;
+            }
+
+            .input-field input {
+                width: 100%;
+                height: 45px;
+                background: transparent;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                color: #fff;
+                padding-top: 15px;
+            }
+
+                .input-field input:focus ~ label,
+                .input-field input:valid ~ label {
+                    font-size: 0.8rem;
+                    top: 5px;
+                    transform: translateY(-120%);
+                    color: rgba(255, 255, 255, 0.9);
+                }
+
+        .forget {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 25px 0 30px 0;
+            color: #fff;
+        }
+
+        #remember {
+            accent-color: #fff;
+        }
+
+        .forget label {
+            display: flex;
+            align-items: center;
+        }
+
+            .forget label p {
+                margin-left: 8px;
+            }
+
+        .wrapper a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+            .wrapper a:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+
+        button {
+            background: #fff;
+            color: #1a2a6c;
+            font-weight: 600;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 16px;
+            border: 2px solid transparent;
+            transition: 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+            button:hover {
+                color: #fff;
+                border-color: #fff;
+                background: rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+            }
+
+        .register {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form asp-controller="Login" asp-action="Login" method="post">
+            <h2>Admin Login</h2>
+            <div class="input-field">
+                <input type="text" name="email" required>
+                <label>Admin ID / Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+            <button type="submit">Login</button>
+            <div style="color:red">@ViewBag.ErrorMessage</div>
+        </form>
+    </div>
+
+</body>
+</html>
